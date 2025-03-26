@@ -8,18 +8,18 @@ from tensorflow.keras.models import load_model
 @st.cache_data # 함수의 입력 매개변수와 반환 값을 캐시에 저장하여 호출 시 재사용
 def load_data():
 
-    model_path = './model/Alzheimer_model3.h5'  # 저장된 모델 경로
+    model_path = './model/Alzheimer_model3_2.h5'  # 저장된 모델 경로
     loaded_model = load_model(model_path)
     #print("저장된 모델이 성공적으로 로드되었습니다.")
     return loaded_model
 
 cnn_model = load_data()
-img_height = 180
-img_width = 180
+img_height = 128
+img_width = 128
 
 # 4. streamlit UI 구현
 st.title("알츠하이머 여부 예측 시스템")
-st.write('MRI 사진을 업로드하여 알츠하이머 여부를 예측해보세요.')
+st.write('MRI 사진을 업로드하여 알츠하이머 여부를 예측해보세요')
 
 # 파일 업로드 위젯
 uploaded_file = st.file_uploader("이미지를 업로드하세요", type=["jpg", "png", "jpeg"])
