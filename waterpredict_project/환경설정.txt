@@ -1,0 +1,32 @@
+<springboot gradle 프로젝트>
+스프링부트 설치 : https://spring.io/tools  ---> Windows 버전 다운
+lombok 다운 및 설치(스프링부트 경로)
+//jstl 에러시 기존 jstl 지우고 아래 추가(build.gradle)
+implementation 'jakarta.servlet:jakarta.servlet-api' //스프링부트 3.0 이상
+implementation 'jakarta.servlet.jsp.jstl:jakarta.servlet.jsp.jstl-api' //스프링부트 3.0 이상
+implementation 'org.glassfish.web:jakarta.servlet.jsp.jstl' //스프링부트 3.0 이상
+
+// 추후 프로젝트 생성 시
+https://start.spring.io/  접속 : Gradle Groovy, JAVA17, ADD Dependencies(Lombok, Spring Boot DevToos, Spring Security,  MariaDB Driver), packing(war)
+
+<gradle 설치>
+url : https://gradle.org/releases/   ----> 8.11.1 버전 설치 (경로 : c:\Program Files\gradle-8.11.1)
+
+<java 17 설치>
+https://www.oracle.com/java/technologies/javase/jdk17-archive-downloads.html
+
+<환경변수>
+시스템 변수 편집
+//Gradle
+- 변수 이름 : GRADLE_HOME
+- 변수 값 : C:\Program Files\gradle-8.11.1
+
+//Java
+- 변수 이름 : JAVA_HOME
+- 변수 값 : C:\Program Files\Java\jdk-17
+
+//path
+- %JAVA_HOME%\bin
+- %GRADLE_HOME%bin
+
+
