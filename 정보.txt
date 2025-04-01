@@ -17,3 +17,9 @@ Server Host : 192.168.0.97
 Database : survey
 Username : root
 Password: 8948864a
+
+<내 허깅페이스 토큰>
+chanwooToken1: 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
+
+<IPv4>
+192.168.0.64

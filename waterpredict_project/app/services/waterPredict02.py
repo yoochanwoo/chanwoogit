@@ -55,7 +55,7 @@ def predict_water_electricity():
     })
 
     # DBMS에 저장
-    engine = create_engine("mysql+pymysql://root:7777@localhost:3306/test?charset=utf8")
+    engine = create_engine("mysql+pymysql://root:7777@localhost:3306/sys?charset=utf8")
     
     # Date 형식을 'YYYY-MM-DD'로 변환
     future_df['Date'] = future_df['Date'].dt.strftime('%Y-%m-%d')
@@ -73,7 +73,7 @@ def predict_water_electricity():
 
 # 데이터 가져오기
 def get_forecast_data():
-    engine = create_engine("mysql+pymysql://root:7777@localhost:3306/test?charset=utf8")
+    engine = create_engine("mysql+pymysql://root:7777@localhost:3306/sys?charset=utf8")
     conn = engine.connect()
     
     result = conn.execute(text("SELECT * FROM elec_forecast")).fetchall()
