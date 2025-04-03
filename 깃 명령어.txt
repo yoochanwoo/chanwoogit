@@ -5,6 +5,8 @@ git commit -m "커밋제목" : 준비된 파일 커밋
 
 git branch : 현재 있는 브란치를 확인
 git branch -a : 현재 있는 브란치와 연결되어있는 깃허브 브란치들 전부 확인
+git branch -vv : 현재 있는 브란치에 연결되어있는 커밋내역 확인
+
 git branch 브란치이름 : 해당 이름의 브란치 생성
 git branch -d 브란치이름 : 해당 이름의 브란치 삭제
 git checkout 브란치이름 : 해당 이름의 브란치로 이동
@@ -19,6 +21,7 @@ git branch --set-upstream-to=깃허브브란치이름 로컬브랜치이름 : �
 git fetch 깃허브브란치이름 : 해당 깃허브의 변경내역을 전부 가져옴
 git pull 깃허브브란치이름 : fetch와 merge를 동시에 시행 (내 로컬을 깃허브의 내용과 동일하게)
 ## merge의 기능을 동시에 실행하므로 충돌에 유의해야 함
+git push --set-upstream 깃허브브란치이름 로컬브란치이름 : 브란치를 깃허브에 추가
 git push 깃허브브란치이름 : 깃허브에 커밋내역을 넣음
 
 git reset --soft HEAD^ : 지금 체크아웃 되어있는 브렌치의 커밋네역 하나 삭제
