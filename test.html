@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>여행지 선택</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: #e6f3ff;
+            font-family: 'Noto Sans KR', sans-serif;
+        }
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px;
+            background-color: #ffffff;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        .logo {
+            width: 50px;
+            height: 50px;
+        }
+        .page-number {
+            color: #666;
+            font-size: 16px;
+        }
+        .title {
+            text-align: center;
+            color: #333;
+            font-size: 24px;
+            margin: 40px 0;
+        }
+        .button-container {
+            display: grid;
+            grid-template-columns: repeat(6, 1fr);
+            gap: 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        .region-button {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            border: none;
+            background-color: #ffffff;
+            color: #333;
+            font-size: 16px;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        .region-button:hover {
+            transform: scale(1.05);
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            background-color: #b3e0ff;
+        }
+        .navigation {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 40px;
+        }
+        .nav-button {
+            padding: 10px 30px;
+            border: none;
+            border-radius: 25px;
+            background-color: #4da6ff;
+            color: white;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.2s;
+        }
+        .nav-button:hover {
+            background-color: #1a8cff;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <img src="logo.png" alt="로고" class="logo">
+        <h1 class="title">여행을 떠나고 싶은 지역을 선택해주세요</h1>
+        <span class="page-number">1/3</span>
+    </div>
+    
+    <div class="button-container">
+        <button class="region-button">서울</button>
+        <button class="region-button">부산</button>
+        <button class="region-button">대구</button>
+        <button class="region-button">인천</button>
+        <button class="region-button">광주</button>
+        <button class="region-button">대전</button>
+        <button class="region-button">울산</button>
+        <button class="region-button">세종</button>
+        <button class="region-button">경기</button>
+        <button class="region-button">강원</button>
+        <button class="region-button">충북</button>
+        <button class="region-button">충남</button>
+        <button class="region-button">전북</button>
+        <button class="region-button">전남</button>
+        <button class="region-button">경북</button>
+        <button class="region-button">경남</button>
+        <button class="region-button">제주</button>
+        <button class="region-button">독도</button>
+    </div>
+
+    <div class="navigation">
+        <button class="nav-button">이전</button>
+        <button class="nav-button">다음</button>
+    </div>
+</body>
+</html>
