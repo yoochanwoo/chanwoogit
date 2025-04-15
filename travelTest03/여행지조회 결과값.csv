@@ -1,0 +1,26 @@
+항목명,항목설명,항목구분,샘플데이터,응답항목설명
+resultCode,결과코드,1,0000,응답결과코드
+resultMsg,결과메시지,1,OK,응답결과메시지
+numOfRows,한페이지결과수,1,10,한페이지결과수
+pageNo,페이지번호,1,1,현재페이지번호
+totalCount,전체결과수,1,745,전체결과수
+addr1,주소,0,강원특별자치도 평창군 진부면 진부시장안길 23,주소 응답
+addr2,상세주소,0,,상세주소
+areacode,지역코드,0,32,지역코드
+booktour,교과서여행지여부,0,,"교과서속여행지여부 (1=여행지, 0=해당없음)"
+cat1,대분류,0,A04,대분류코드
+cat2,중분류,0,A0401,중분류코드
+cat3,소분류,0,A04010100,소분류코드
+contentid,콘텐츠ID,1,132533,콘텐츠ID
+contenttypeid,콘텐츠타입ID,1,38,"관광타입(관광지, 숙박 등) ID"
+createdtime,등록일,1,20020422090000,콘텐츠최초등록일
+firstimage,대표이미지(원본),0,http://tong.visitkorea.or.kr/cms/resource/62/3379362_image2_1.jpg,원본대표이미지(약500*333 size) URL 응답
+firstimage2,대표이미지(썸네일),0,http://tong.visitkorea.or.kr/cms/resource/62/3379362_image3_1.jpg,썸네일대표이미지(약 150*100 size) URL 응답
+cpyrhtDivCd,저작권유형,0,Type3,"Type1 : 제1유형(출처표시-권장), Type3 : 제3유형(제1유형 + 변경금지)"
+mapx,GPS X좌표,0,128.5582979332,GPS X좌표(WGS84 경도좌표) 응답
+mapy,GPS Y좌표,0,37.6378280865,GPS Y좌표(WGS84 위도좌표) 응답
+mlevel,Map Level,0,6,Map Level 응답
+modifiedtime,수정일,1,20250108173352,콘텐츠수정일
+sigungucode,시군구코드,0,15,시군구코드
+tel,전화번호,0,033-335-3133,전화번호
+title,제목,1,"전부장 / 전부시장 (3, 8일)",콘텐츠제목
