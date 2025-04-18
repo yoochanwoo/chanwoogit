@@ -1,13 +1,14 @@
-from fastapi import FastAPI
-from fastAPIDBTest.app.router.choose_val_router import router
 from sqlalchemy import create_engine
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
+import mariadb
 
-app = FastAPI()
-
+"""
+DB 설정 파이썬 파일
+유찬우 만듦
+"""
 # MariaDB 연결 설정
-SQLALCHEMY_DATABASE_URL = "mariadb+mariadbconnector://4team:4444@192.168.0.46:3306/sodam?charset=utf8"
+SQLALCHEMY_DATABASE_URL = "mariadb+mariadbconnector://4team:4444@192.168.0.46:3306/sodam" #?charset=utf8mb4
 engine = create_engine(
     SQLALCHEMY_DATABASE_URL,
     pool_size=5, # 데이터베이스 연결 풀의 기본 크기 (5명이 동시에 사용 가능)
@@ -21,15 +22,13 @@ SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
 # autoflush=False : 자동 플러시 비활성화
 # bind=engine : 엔진에 바인딩된 세션 매이커 생성
 
-# 데이터베이스 모델 기본 클래스
+# SQLAlchemy 모델의 기본 클래스
 Base = declarative_base()
 
-# 라우터 등록
-app.include_router(router)
-
-# 데이터베이스 테이블 생성
-Base.metadata.create_all(bind=engine)
-
-if __name__ == "__main__":
-    import uvicorn
-    uvicorn.run(app, host="0.0.0.0", port=8586)
+# 의존성 주입을 위한 DB 세션 생성기
+def get_db():
+    db = SessionLocal()
+    try:
+        yield db # yield : 함수를 종료하지 않고 값을 반환 (return은 종료하면서 반환)
+    finally:
+        db.close()

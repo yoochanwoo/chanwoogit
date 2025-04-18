@@ -1,30 +1,61 @@
+기반다지기
+git config --global user.name "내 이름" : 깃 커밋하는 사람이름 설정
+git config --global user.email "내 깃허브 주소" : 깃 커밋하는 사람 깃허브 주소
+git config --global init.defaultBranch main : 내 브란치 기본이름을 main으로 설정 (원래는 master임)
+git config --global core.editor "code --wait" : 내 기본 깃 툴을 vscode로 설정
+
+초기화
+git init : 이 곳에 깃 저장소를 만듦
+
+자주 쓰는 기본 명령어
 git status : 현재 커밋 준비상태 확인
 git add 파일이름 : 해당 파일 커밋준비
 git add --all : 모든 변경된 파일 커밋준비
 git commit -m "커밋제목" : 준비된 파일 커밋
+git log --all --online : 모든 커밋기록 한줄씩 보기
+git difftool : diff를 시각적으로 좋게 볼 수 있음
 
+알고있으면 멋진 명령어
+git stash : 최근 커밋으로부터 변경된 코드를 임시 저장(커밋된 적 없는 파일의 코드수정은 저장 안됨)
+git stash save "메모" : 해당 저장 내역에 메모를 적어둘 수 있음
+git stash pop : 가장 최근 스타쉬 된 코드 불러오기
+git stash drop 1 : 스타쉬 하나 삭제(여러개 삭제 가능)
+git stash clear : 스타쉬 전부 삭제
+(주석처리하면 되는 거 아님?)
+
+브란치 관련
 git branch : 현재 있는 브란치를 확인
 git branch -a : 현재 있는 브란치와 연결되어있는 깃허브 브란치들 전부 확인
-git branch -vv : 현재 있는 브란치에 연결되어있는 커밋내역 확인
-
 git branch 브란치이름 : 해당 이름의 브란치 생성
 git branch -d 브란치이름 : 해당 이름의 브란치 삭제
 git checkout 브란치이름 : 해당 이름의 브란치로 이동
 git checkout -b 브란치이름 : 해당 이름의 브란치 생성 후 이동
+git switch 브란치 이름 : 체크아웃이랑 동일
 
+브란치 병합
 git merge 브란치이름 : 현재 체크아웃 되어있는 브란치와 해당 이름의 브란치를 병합
+git merge --squash 브란치이름 : 해당 브란치와 통합하면서 삭제함
 ## 각 브란치가 동일한 파일의 변경 commit 내역을 가지고 있으면 충돌이 남
 ## 충돌이 난 파일을 수정하고 commit하면 병합 가능
 
-git remote add 저장할깃허브브란치이름 깃허브주소 : 해당 이름으로 깃허브 브란치 추가
-git branch --set-upstream-to=깃허브브란치이름 로컬브랜치이름 : 해당 깃허브와 브란치 연결
+원격 저장소 관련
+git clone 깃허브주소 : 해당 깃허브의 저장소를 복제하여 만듦(git init의 원격 형태)
 git fetch 깃허브브란치이름 : 해당 깃허브의 변경내역을 전부 가져옴
 git pull 깃허브브란치이름 : fetch와 merge를 동시에 시행 (내 로컬을 깃허브의 내용과 동일하게)
-git pull --allow-unrelated-histories 커밋내역이 다르더라도 merge 실행
 ## merge의 기능을 동시에 실행하므로 충돌에 유의해야 함
-git push --set-upstream 깃허브브란치이름 로컬브란치이름 : 브란치를 깃허브에 추가
 git push 깃허브브란치이름 : 깃허브에 커밋내역을 넣음
+git remote add 변수이름 변수내용 : 해당 내용의 변수를 추가함(보통 깃허브 주소를 origin이라는 변수로 저장함)
 
+복구관련
+git restore 파일이름 : 해당 파일의 내용을 최신 커밋의 내용으로 복구
+git restore --source 커밋아이디 파일이름 : 해당 커밋시점으로 파일의 내용을 복구
+git restore --staged  파일이름 : 해당 파일을 스테이징 취소 (git status를 입력하면 힌트로 확인 가능)
+git revert 커밋아이디 : 해당 커밋을 삭제함
+git revert 커밋아이디1 커밋아이디2 : 여러 커밋을 삭제 가능
+git revert HEAD : 가장 최근 커밋 취소(삭제)
+git reset --hard 커밋아이디 : 해당 커밋 시점으로 돌아가기
+git reset --soft 커밋아이디 : 리셋인데 변동사항은 안지우고 스테이징함
+git reset --mixed 커밋아이디 : 리셋인데 변동사항은 안지우고 놔둠(스테이징 안 된 상태로)
 git reset --soft HEAD^ : 지금 체크아웃 되어있는 브렌치의 커밋네역 하나 삭제
 git reset --soft HEAD~2 : 지금 체크아웃 되어있는 브렌치의 커밋네역 둘 삭제
 ## 주의 ##
