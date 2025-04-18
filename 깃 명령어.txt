@@ -26,6 +26,7 @@ git stash clear : 스타쉬 전부 삭제
 브란치 관련
 git branch : 현재 있는 브란치를 확인
 git branch -a : 현재 있는 브란치와 연결되어있는 깃허브 브란치들 전부 확인
+git branch -vv : 현재 있는 브란치에 연결되어있는 커밋내역 확인
 git branch 브란치이름 : 해당 이름의 브란치 생성
 git branch -d 브란치이름 : 해당 이름의 브란치 삭제
 git checkout 브란치이름 : 해당 이름의 브란치로 이동
@@ -40,10 +41,13 @@ git merge --squash 브란치이름 : 해당 브란치와 통합하면서 삭제�
 
 원격 저장소 관련
 git clone 깃허브주소 : 해당 깃허브의 저장소를 복제하여 만듦(git init의 원격 형태)
-git fetch 깃허브브란치이름 : 해당 깃허브의 변경내역을 전부 가져옴
-git pull 깃허브브란치이름 : fetch와 merge를 동시에 시행 (내 로컬을 깃허브의 내용과 동일하게)
+git branch --set-upstream-to=깃허브주소 로컬브랜치이름 : 해당 깃허브와 브란치 연결
+git fetch 깃허브주소 : 해당 깃허브의 변경내역을 전부 가져옴
+git pull 깃허브주소 : fetch와 merge를 동시에 시행 (내 로컬을 깃허브의 내용과 동일하게)
+git pull --allow-unrelated-histories 커밋내역이 다르더라도 merge 실행
 ## merge의 기능을 동시에 실행하므로 충돌에 유의해야 함
-git push 깃허브브란치이름 : 깃허브에 커밋내역을 넣음
+git push 깃허브주소 : 깃허브에 커밋내역을 넣음
+git push --set-upstream 깃허브주소 로컬브란치이름 : 브란치를 깃허브에 추가
 git remote add 변수이름 변수내용 : 해당 내용의 변수를 추가함(보통 깃허브 주소를 origin이라는 변수로 저장함)
 
 복구관련
