@@ -1,0 +1,20 @@
+1.  터미널로 가상환경 만들고 싶은 경로에 접근
+2.  python -m venv 가상환경이름
+    : 이 경로에 해당 이름으로 파이썬 가상커널을 만듦
+3.  (cmd) call 가상환경이름/Scripts/activate
+    (powershell) .\myKernel1\Scripts\Activate.ps1
+        - 해당 커널 활성화 (관리자 권한으로 실행해야 작동함)
+            환경 다르면 검색해서 활성화 코드 찾기
+3-1.vsCode로 터미널 열었는데 관리자권한 어캐 품?
+    - (powershell) Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass
+        : 일시적으로 관리자권한을 풀어줌
+4.  터미널에서 파이썬 실행하려면 터미널 새로 열릴 때마다 커널 활성화 코드 매번 입력해야함
+4-1. vsCode에서는 커널 자동으로 설정 가능
+
+5.  (powershell) Remove-Item -Recurse -Force .\가상환경이름
+    : 가상환경 삭제 코드 (그냥 폴더 우클릭해서 휴지통에 넣어도 됨)
+5-1. 가상환경이 활성화되어있지 않은 상태에서 삭제해야함
+
+참고
+pip install -r requirements.txt : requirements 텍스트파일에 들어있는 lib 전부 받기
+pip freeze > requirements.txt : 내가 가진 lib 목록을 requirements으로 만들기
