@@ -4,6 +4,12 @@ git config --global user.email "내 깃허브 주소" : 깃 커밋하는 사람 
 git config --global init.defaultBranch main : 내 브란치 기본이름을 main으로 설정 (원래는 master임)
 git config --global core.editor "code --wait" : 내 기본 깃 툴을 vscode로 설정
 
+에디터 화면
+i : 문자 끼워넣기
+esc : 작업 중지
+(:) : 명령어 입력
+:wq 저장 후 종료
+
 초기화
 git init : 이 곳에 깃 저장소를 만듦
 
@@ -22,6 +28,8 @@ git stash pop : 가장 최근 스타쉬 된 코드 불러오기
 git stash drop 1 : 스타쉬 하나 삭제(여러개 삭제 가능)
 git stash clear : 스타쉬 전부 삭제
 (주석처리하면 되는 거 아님?)
+git commit --amend : 최근 커밋메세지 수정
+
 
 브란치 관련
 git branch : 현재 있는 브란치를 확인
