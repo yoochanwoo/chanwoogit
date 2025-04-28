@@ -16,5 +16,6 @@
 5-1. 가상환경이 활성화되어있지 않은 상태에서 삭제해야함
 
 참고
+- deactivate 가상환경 커널 비활성화
 pip install -r requirements.txt : requirements 텍스트파일에 들어있는 lib 전부 받기
 pip freeze > requirements.txt : 내가 가진 lib 목록을 requirements으로 만들기
