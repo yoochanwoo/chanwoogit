@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>도형 그리기 도구</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    #canvasContainer {
+      border: 1px solid #ccc;
+      overflow: hidden;
+      width: 100%;
+      height: 600px;
+    }
+    svg {
+      width: 100%;
+      height: 100%;
+      cursor: grab;
+      user-select: none;
+    }
+    rect {
+      fill: #2196f3;
+      cursor: move;
+    }
+  </style>
+</head>
+<body class="p-3">
+
+  <div class="mb-2">
+    <button id="addRectBtn" class="btn btn-primary">사각형 추가</button>
+    <button id="toggleSnapBtn" class="btn btn-secondary ms-2">스냅: OFF</button>
+  </div>
+
+  <div id="canvasContainer">
+    <svg id="drawingArea" viewBox="0 0 1000 1000"></svg>
+  </div>
+
+  <script>
+    const svg = document.getElementById('drawingArea');
+    const addRectBtn = document.getElementById('addRectBtn');
+    const toggleSnapBtn = document.getElementById('toggleSnapBtn');
+
+    let zoom = 1;
+    let panX = 0;
+    let panY = 0;
+    let isPanning = false;
+    let startPan = {};
+    let snapEnabled = false;  // 스냅 기능 상태
+    let snapThreshold = 10;   // 스냅 거리 (px)
+
+    function updateViewBox() {
+      const width = 1000 / zoom;
+      const height = 1000 / zoom;
+      svg.setAttribute('viewBox', `${panX} ${panY} ${width} ${height}`);
+    }
+
+    // 가장 정확한 SVG 좌표 변환 함수
+    function getSvgPoint(event) {
+      const pt = svg.createSVGPoint();
+      pt.x = event.clientX;
+      pt.y = event.clientY;
+      return pt.matrixTransform(svg.getScreenCTM().inverse());
+    }
+
+    // 확대/축소 (포인터 기준)
+    svg.addEventListener('wheel', function (e) {
+      e.preventDefault();
+      const scaleAmount = 0.1;
+      const point = getSvgPoint(e);
+      const zoomDelta = e.deltaY > 0 ? -scaleAmount : scaleAmount;
+      const newZoom = Math.min(Math.max(zoom + zoomDelta, 0.2), 3);
+
+      // 포인터 기준 보정
+      panX = point.x - (point.x - panX) * (zoom / newZoom);
+      panY = point.y - (point.y - panY) * (zoom / newZoom);
+      zoom = newZoom;
+
+      updateViewBox();
+    });
+
+    // 캔버스 패닝
+    svg.addEventListener('mousedown', (e) => {
+      if (e.target === svg) {
+        isPanning = true;
+        startPan = { x: e.clientX, y: e.clientY, panX, panY };
+        svg.style.cursor = 'grabbing';
+      }
+    });
+
+    svg.addEventListener('mousemove', (e) => {
+      if (isPanning) {
+        const dx = (e.clientX - startPan.x) / zoom;
+        const dy = (e.clientY - startPan.y) / zoom;
+        panX = startPan.panX - dx;
+        panY = startPan.panY - dy;
+        updateViewBox();
+      }
+    });
+
+    svg.addEventListener('mouseup', () => {
+      isPanning = false;
+      svg.style.cursor = 'grab';
+    });
+
+    svg.addEventListener('mouseleave', () => {
+      isPanning = false;
+      svg.style.cursor = 'grab';
+    });
+
+    // 사각형 추가 버튼
+    addRectBtn.addEventListener('click', () => {
+      const rect = document.createElementNS('http://www.w3.org/2000/svg', 'rect');
+      rect.setAttribute('x', 100 + Math.random() * 300);
+      rect.setAttribute('y', 100 + Math.random() * 300);
+      rect.setAttribute('width', 100);
+      rect.setAttribute('height', 100);
+      rect.setAttribute('fill', '#2196f3');
+
+      let isDragging = false;
+      let offset = {};
+
+      // 사각형 드래그 시작
+      rect.addEventListener('mousedown', (e) => {
+        isDragging = true;
+        const point = getSvgPoint(e);
+        offset = {
+          x: point.x - parseFloat(rect.getAttribute('x')),
+          y: point.y - parseFloat(rect.getAttribute('y'))
+        };
+        e.stopPropagation(); // 패닝 방지
+      });
+
+      // 드래그 중 위치 이동
+      svg.addEventListener('mousemove', (e) => {
+        if (isDragging) {
+          const point = getSvgPoint(e);
+          let newX = point.x - offset.x;
+          let newY = point.y - offset.y;
+
+          // 스냅 기능이 활성화되어 있다면
+          if (snapEnabled) {
+            newX = snapToNearby(newX, 'x');
+            newY = snapToNearby(newY, 'y');
+          }
+
+          rect.setAttribute('x', newX);
+          rect.setAttribute('y', newY);
+        }
+      });
+
+      window.addEventListener('mouseup', () => {
+        isDragging = false;
+      });
+
+      // 사각형 삭제 (더블클릭)
+      rect.addEventListener('dblclick', () => {
+        svg.removeChild(rect);
+      });
+
+      svg.appendChild(rect);
+    });
+
+    // 스냅 기능 토글
+    toggleSnapBtn.addEventListener('click', () => {
+      snapEnabled = !snapEnabled;
+      toggleSnapBtn.textContent = `스냅: ${snapEnabled ? 'ON' : 'OFF'}`;
+    });
+
+    // 스냅 기능 적용 (주어진 축에 대해 가까운 사각형에 맞추기)
+    function snapToNearby(value, axis) {
+      let closest = null;
+      let snapValue = value;
+
+      // 모든 사각형들에 대해 위치 계산
+      Array.from(svg.getElementsByTagName('rect')).forEach((rect) => {
+        const rectX = parseFloat(rect.getAttribute('x'));
+        const rectY = parseFloat(rect.getAttribute('y'));
+        const rectWidth = parseFloat(rect.getAttribute('width'));
+        const rectHeight = parseFloat(rect.getAttribute('height'));
+
+        let snapPoint = axis === 'x' ? [rectX, rectX + rectWidth / 2, rectX + rectWidth] : [rectY, rectY + rectHeight / 2, rectY + rectHeight];
+        snapPoint.forEach((point) => {
+          if (Math.abs(value - point) <= snapThreshold) {
+            snapValue = point;
+          }
+        });
+      });
+
+      return snapValue;
+    }
+
+    // 초기 viewBox 설정
+    updateViewBox();
+  </script>
+</body>
+</html>
