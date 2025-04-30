@@ -2,7 +2,8 @@
 2.  python -m venv 가상환경이름
     : 이 경로에 해당 이름으로 파이썬 가상커널을 만듦
 3.  (cmd) call 가상환경이름/Scripts/activate
-    (powershell) .\myKernel1\Scripts\Activate.ps1
+    (powershell) .\가상환경이름\Scripts\Activate.ps1
+    (wsl) source 가상환경이름/bin/activate (가상환경이 있는 곳에서 실행)
         - 해당 커널 활성화 (관리자 권한으로 실행해야 작동함)
             환경 다르면 검색해서 활성화 코드 찾기
 3-1.vsCode로 터미널 열었는데 관리자권한 어캐 품?
