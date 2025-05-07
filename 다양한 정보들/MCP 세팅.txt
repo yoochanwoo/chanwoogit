@@ -1,0 +1,28 @@
+MCP 세팅
+
+클로드 데스크탑 : https://claude.ai/download
+Node.js 설치 : https://nodejs.org/ko/download/
+MCP서버 사이트
+- https://www.claudemcp.com/ko/servers/filesystem
+- https://smithery.ai
+
+클로드 데스크탑 : 파일>설정> 개발자 > 설정편집 버튼 클릭하여 필요한 플러그인 저장
+
+// 예시 //
+{
+  "mcpServers": {
+    "filesystem": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "@modelcontextprotocol/server-filesystem",
+        "C:\\Users\\ahnda\\Downloads"
+      ]
+    },
+    "youtube-transcript": {
+      "command": "npx",
+      "args": ["-y", "@kimtaeyoon83/mcp-server-youtube-transcript"]
+    }
+  }
+}
+

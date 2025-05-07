@@ -1,0 +1,13 @@
+1. 파이썬 버전 불일치
+ // 여러 파이썬 버전이 설치되어 있고, pip와 실행 중인 python이 서로 다른 버전을 참고할 경우//
+ - python --version 과 pip --version을 실행해 두 버전이 일치하는지 확인
+ - python -m pip install <라이브러리>
+
+2. 가상 환경 문제
+// 파이썬에서 가상 환경을 사용 중인데, 라이브러리가 다른 환경에 설치된 경우//
+ - 터미널에서 which python(Linux/Mac) 또는 where python(Windows), 파워쉘(PS)인 경우 Get-Command python 를 실행해 실행 중인 파이썬 경로 확인
+ - 가상 환경이 활성화되어 있는지 확인하고, 그렇지 않다면 source venv/bin/activate (Linux/Mac) 또는 venv\Scripts\activate (Windows)로 활성화
+
+3. 파일 이름 충돌 
+ - 작업 디렉토리에 라이브러리 이름과 동일한 .py 파일이 있으면, 파이썬이 모듈 대신 그 파일을 불러올 수 있음
+ - 예를 들어, requests라는 라이브러리를 쓰는데 requests.py라는 파일이 있다면 충돌 발생.
